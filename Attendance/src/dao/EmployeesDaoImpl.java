@@ -17,7 +17,7 @@ public class EmployeesDaoImpl implements EmployeesDao<Employees>{
 	PreparedStatement pst=null;
 	@Override
 	public void addEmployees(Employees employees) {// 添加员工信息,并且在登录表中添加信息
-		String addToTlogin="insert into tlogin (UserName,PassWord) values (?,?)";
+		String addToTlogin="insert into tlogin (id,UserName,PassWord) values (?,?,?)";
 		String addToEmployee="insert into employees (staffCode,name,sex,age,nation,idNumber,salary,phone,emergencyContact,emergencyContactNumber,stationId,individualDescription,classes)  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		conn=dbc.getConnection();
 		try {
@@ -37,8 +37,9 @@ public class EmployeesDaoImpl implements EmployeesDao<Employees>{
 			pst.setString(13, employees.getClasses());
 			 pst.execute();
 			pst=conn.prepareStatement(addToTlogin);
-			pst.setString(1,employees.getName());
-			pst.setString(2, "123456");
+			pst.setInt(1,employees.getEmp_id());
+			pst.setString(2,employees.getName());
+			pst.setString(3, "123456");
 			pst.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -59,12 +60,17 @@ public class EmployeesDaoImpl implements EmployeesDao<Employees>{
 	@Override
 	public void removeEmployeesByEmp_ids(int[] emp_ids) {// 通过员工id数组批量删除员工信息
 		String sql="delete from employees where emp_id=?";
+		String sql1="delete from tlogin where id=?";
+		PreparedStatement pst1=null;
 		conn=dbc.getConnection();
 		try {
 			pst=conn.prepareStatement(sql);
+			pst1=conn.prepareStatement(sql1);
 			for(int id:emp_ids) {
 				pst.setInt(1,id);
+				pst1.setInt(1,id);
 				pst.execute();
+				pst1.execute();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -72,6 +78,7 @@ public class EmployeesDaoImpl implements EmployeesDao<Employees>{
 		}finally {
 			try {
 				pst.close();
+				pst1.close();
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -83,10 +90,15 @@ public class EmployeesDaoImpl implements EmployeesDao<Employees>{
 	@Override
 	public void deleteEmployeesByEmp_id(int emp_id) {// 通过员工id删除员工信息
 		String sql="delete from employees where emp_id=?";
+		String sql1="delete from tlogin where id=?";
+		PreparedStatement pst1=null;
 		conn=dbc.getConnection();
 		try {
 			pst=conn.prepareStatement(sql);
+			pst1=conn.prepareStatement(sql1);
 			pst.setInt(1,emp_id);
+			pst1.setInt(1,emp_id);
+			pst1.execute();
 			pst.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -94,6 +106,7 @@ public class EmployeesDaoImpl implements EmployeesDao<Employees>{
 		}finally {
 			try {
 				pst.close();
+				pst1.close();
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -106,9 +119,12 @@ public class EmployeesDaoImpl implements EmployeesDao<Employees>{
 	@Override
 	public void updateEmployeesByEmp_id(int emp_id,Employees employees) {// 通过员工的id修改员工的信息
 		String sql="update  employees set staffCode=?,name=?,sex=?,age=?,nation=?,idNumber=?,salary=?,phone=?,emergencyContact=?,stationId=?,individualDescription=?,classes=? where emp_id=?";
+		String sql1="update  tlogin set Username=? where id=?";
+		PreparedStatement pst1=null;
 		conn=dbc.getConnection();
 		try {
 			pst=conn.prepareStatement(sql);
+			pst1=conn.prepareStatement(sql1);
 			pst.setString(1,employees.getStaffCode());
 			pst.setString(2, employees.getName());
 			pst.setString(3, employees.getSex());
@@ -122,12 +138,16 @@ public class EmployeesDaoImpl implements EmployeesDao<Employees>{
 			pst.setString(11, employees.getIndividualDescription());
 			pst.setString(12,employees.getClasses());
 			pst.setInt(13,emp_id);
+			pst1.setString(1, employees.getName());
+			pst1.setInt(2,emp_id);
+			pst1.execute();
 			pst.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			try {
+				pst1.close();
 				pst.close();
 				conn.close();
 			} catch (SQLException e) {
