@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50643
 File Encoding         : 65001
 
-Date: 2019-07-07 14:42:28
+Date: 2019-07-08 23:00:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,7 +32,6 @@ CREATE TABLE `checkreport` (
 -- ----------------------------
 -- Records of checkreport
 -- ----------------------------
-INSERT INTO `checkreport` VALUES ('1', 'CZX', '陈知心', '2019-06-01 08:00', '2019-06-01 17:30', '正常');
 INSERT INTO `checkreport` VALUES ('3', 'ZS', '张三', '2019-06-01 08:30', '2019-06-01 16:30', '早退');
 INSERT INTO `checkreport` VALUES ('5', 'LS', '李四', '2019-06-01 08:30', '2019-06-01 17:30', '正常');
 INSERT INTO `checkreport` VALUES ('7', 'WEG', '王二狗', '2019-06-01 08:30', '2019-06-01 17:30', '正常');
@@ -76,7 +75,7 @@ INSERT INTO `checkreport` VALUES ('81', 'CZX', '陈知心', '2019-06-05 08:00', 
 INSERT INTO `checkreport` VALUES ('83', 'ZS', '张三', '2019-06-05 08:00', '2019-06-05 17:30', '正常');
 INSERT INTO `checkreport` VALUES ('85', 'LS', '李四', '2019-06-05 08:00', '2019-06-05 17:30', '正常');
 INSERT INTO `checkreport` VALUES ('87', 'WEG', '王二狗', '2019-06-05 08:00', '2019-06-05 17:30', '正常');
-INSERT INTO `checkreport` VALUES ('89', 'ZG', '赵构', '2019-06-05 08:00', null, '旷工');
+INSERT INTO `checkreport` VALUES ('89', 'ZG', '赵构', '2019-06-05 08:00', '2019-06-05 17:00', '正常');
 INSERT INTO `checkreport` VALUES ('91', 'CH', '翠花', '2019-06-05 08:00', '2019-06-05 17:30', '正常');
 INSERT INTO `checkreport` VALUES ('93', 'LY', '刘英', '2019-06-05 08:00', '2019-06-05 17:30', '正常');
 INSERT INTO `checkreport` VALUES ('95', 'XDJ', '谢大脚', '2019-06-05 08:00', '2019-06-05 17:30', '正常');
@@ -103,6 +102,7 @@ INSERT INTO `checkreport` VALUES ('135', 'XDJ', '谢大脚', '2019-06-07 08:00',
 INSERT INTO `checkreport` VALUES ('137', 'YQ', '永强', '2019-06-07 08:00', '2019-06-07 17:30', '正常');
 INSERT INTO `checkreport` VALUES ('139', 'LN', '刘能', '2019-06-07 08:00', '2019-06-07 17:30', '正常');
 INSERT INTO `checkreport` VALUES ('143', 'LN', '刘能', '2019-06-08 07:30', '2019-06-08 17:30', '正常');
+INSERT INTO `checkreport` VALUES ('157', 'CZX', '陈知心', '2019-06-01 08:00', '2019-06-01 17:30', '正常');
 
 -- ----------------------------
 -- Table structure for classes
@@ -121,8 +121,8 @@ CREATE TABLE `classes` (
 -- ----------------------------
 -- Records of classes
 -- ----------------------------
-INSERT INTO `classes` VALUES ('6', 'ZB', '早班', '08:00', '17:00', '早上上班时间');
-INSERT INTO `classes` VALUES ('10', 'WB', '晚班', '11:00', '23:00', '');
+INSERT INTO `classes` VALUES ('6', 'ZB', '早班', '08:00', '17:00', '早班时间');
+INSERT INTO `classes` VALUES ('10', 'WB', '晚班', '11:00', '23:00', '晚班时间');
 
 -- ----------------------------
 -- Table structure for department
@@ -136,12 +136,12 @@ CREATE TABLE `department` (
   `departmentResponsibility` varchar(255) COLLATE utf8_unicode_520_ci DEFAULT NULL,
   `superiorDepartmentId` int(11) DEFAULT NULL,
   PRIMARY KEY (`departmentID`,`departmentCode`)
-) ENGINE=InnoDB AUTO_INCREMENT=610 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=611 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of department
 -- ----------------------------
-INSERT INTO `department` VALUES ('100', 'ZCS', '总裁室', '王二狗', '管理公司', '100');
+INSERT INTO `department` VALUES ('100', 'ZCS', '总裁室', '陈知心', '管理公司', '100');
 INSERT INTO `department` VALUES ('200', 'KFZ', '总裁', '陈知心', '管理开发项目', '200');
 INSERT INTO `department` VALUES ('300', 'CWB', '财务部', '谢大脚', '管理公司财务', '100');
 INSERT INTO `department` VALUES ('400', 'HR', '人力资源部', '陈知心', '人员招聘', '100');
@@ -168,21 +168,22 @@ CREATE TABLE `employees` (
   `individualDescription` varchar(255) COLLATE utf8_unicode_520_ci DEFAULT NULL,
   `classes` varchar(255) COLLATE utf8_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`emp_id`,`staffCode`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10020 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=10057 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of employees
 -- ----------------------------
-INSERT INTO `employees` VALUES ('10001', 'CZX', '陈知心', '男', '25', '汉族', '1', '40000', '18812345678', '小A', '28812345678', '101', '总裁', '早班');
-INSERT INTO `employees` VALUES ('10002', 'ZS', '张三', '男', '20', '汉族', '2', '6500', '13012345678', '小B', '23012345678', '501', '前端开发', '早班');
-INSERT INTO `employees` VALUES ('10003', 'LS', '李四', '男', '31', '汉族', '3', '8000', '13512345678', '小C', '23512345678', '501', '后端开发', '早班');
-INSERT INTO `employees` VALUES ('10004', 'WEG', '王二狗', '男', '35', '汉族', '4', '2000', '13912345678', '小D', '23912345678', '401', '总经理', '早班');
-INSERT INTO `employees` VALUES ('10005', 'ZG', '赵构', '男', '22', '汉族', '5', '3500', '17712345678', '小E', '27712345678', '501', '后勤', '早班');
-INSERT INTO `employees` VALUES ('10006', 'CH', '翠花', '女', '26', '汉族', '6', '4000', '16812345678', '小F', '26812345678', '501', '前台', '早班');
-INSERT INTO `employees` VALUES ('10007', 'LY', '刘英', '女', '28', '汉族', '7', '6500', '15512345678', '小G', '25512345678', '401', 'HR招聘', '早班');
-INSERT INTO `employees` VALUES ('10008', 'XDJ', '谢大脚', '女', '31', '汉族', '8', '5500', '13812345678', '小H', '23812345678', '301', '财务', '早班');
-INSERT INTO `employees` VALUES ('10009', 'YQ', '永强', '男', '24', '汉族', '9', '4000', '15312345678', '小N', '25312345678', '302', '财务', '早班');
-INSERT INTO `employees` VALUES ('10010', 'LN', '刘能', '男', '26', '汉族', '10', '5000', '17912345678', '小M', '27912345678', '402', 'HR招聘', '早班');
+INSERT INTO `employees` VALUES ('10001', 'CZX', '陈知心', '男', '25', '汉族', '1515122441124214', '40000', '18812345678', '小A', '28812345678', '101', '总裁', '早班');
+INSERT INTO `employees` VALUES ('10002', 'ZS', '张三', '男', '20', '汉族', '1515122441124214', '6500', '13012345678', '小B', '23012345678', '501', '前端开发', '早班');
+INSERT INTO `employees` VALUES ('10003', 'LS', '李四', '男', '31', '汉族', '1515122441124214', '8000', '13512345678', '小C', '23512345678', '501', '后端开发', '早班');
+INSERT INTO `employees` VALUES ('10004', 'WEG', '王二狗', '男', '35', '汉族', '1515122441124214', '2000', '13912345678', '小D', '23912345678', '401', '总经理', '早班');
+INSERT INTO `employees` VALUES ('10005', 'ZG', '赵构', '男', '22', '汉族', '1515122441124214', '3500', '17712345678', '小E', '27712345678', '501', '后勤', '早班');
+INSERT INTO `employees` VALUES ('10006', 'CH', '翠花', '女', '26', '汉族', '1515122441124214', '4000', '16812345678', '小F', '26812345678', '501', '前台', '早班');
+INSERT INTO `employees` VALUES ('10007', 'LY', '刘英', '女', '28', '汉族', '1515122441124214', '6500', '15512345678', '小G', '25512345678', '401', 'HR招聘', '早班');
+INSERT INTO `employees` VALUES ('10008', 'XDJ', '谢大脚', '女', '31', '汉族', '1515122441124214', '5500', '13812345678', '小H', '23812345678', '301', '财务', '早班');
+INSERT INTO `employees` VALUES ('10009', 'YQ', '永强', '男', '24', '汉族', '1515122441124214', '4000', '15312345678', '小N', '25312345678', '302', '财务', '早班');
+INSERT INTO `employees` VALUES ('10010', 'LN', '刘能', '男', '26', '汉族', '1515122441124214', '5000', '17912345678', '小M', '27912345678', '402', 'HR招聘', '早班');
+INSERT INTO `employees` VALUES ('10021', 'LHQ', '林湖青', '男', '22', '汉族', '1515152515612331', '4424', '11224512', '525151', null, '101', '令狐青', '早班');
 
 -- ----------------------------
 -- Table structure for leaves
@@ -195,16 +196,16 @@ CREATE TABLE `leaves` (
   `endTime` varchar(255) COLLATE utf8_unicode_520_ci DEFAULT NULL,
   `leaveReason` varchar(255) COLLATE utf8_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`Id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of leaves
 -- ----------------------------
-INSERT INTO `leaves` VALUES ('1', '陈知心', '2019-06-03', '2019-06-03', '肚子痛迟到');
-INSERT INTO `leaves` VALUES ('2', '张三', '2019-06-03', '2019-06-03', '提前下班接孩子');
-INSERT INTO `leaves` VALUES ('3', '李四', '2019-06-04', '2019-06-04', '身体不适');
-INSERT INTO `leaves` VALUES ('4', '永强', '2019-06-04', '2019-06-04', '身体不适提前下班');
-INSERT INTO `leaves` VALUES ('5', '赵构', '2019-06-05', '2019-06-05', '提前下班参加婚礼');
+INSERT INTO `leaves` VALUES ('1', '陈知心', '2019-06-03 08:00', '2019-06-03 18:00', '肚子痛迟到');
+INSERT INTO `leaves` VALUES ('2', '张三', '2019-06-03 08:00', '2019-06-03 18:00', '提前下班接孩子');
+INSERT INTO `leaves` VALUES ('3', '李四', '2019-06-04 08:00', '2019-06-04 18:00', '身体不适');
+INSERT INTO `leaves` VALUES ('4', '永强', '2019-06-04 08:00', '2019-06-04 18:00', '身体不适提前下班');
+INSERT INTO `leaves` VALUES ('5', '赵构', '2019-06-05 08:00', '2019-06-05 18:00', '提前下班参加婚礼');
 
 -- ----------------------------
 -- Table structure for paysalary
@@ -244,12 +245,12 @@ CREATE TABLE `punchcard` (
   `punchCardDate` varchar(255) COLLATE utf8_unicode_520_ci NOT NULL,
   `Remark` varchar(255) COLLATE utf8_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`Id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=167 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of punchcard
 -- ----------------------------
-INSERT INTO `punchcard` VALUES ('1', '陈知心', '2019-06-01 08:00', null);
+INSERT INTO `punchcard` VALUES ('1', '陈知心', '2019-06-01 08:00', '');
 INSERT INTO `punchcard` VALUES ('2', '陈知心', '2019-06-01 17:30', null);
 INSERT INTO `punchcard` VALUES ('3', '张三', '2019-06-01 08:30', null);
 INSERT INTO `punchcard` VALUES ('4', '张三', '2019-06-01 16:30', null);
@@ -379,6 +380,8 @@ INSERT INTO `punchcard` VALUES ('139', '刘能', '2019-06-07 08:00', null);
 INSERT INTO `punchcard` VALUES ('140', '刘能', '2019-06-07 17:30', null);
 INSERT INTO `punchcard` VALUES ('143', '刘能', '2019-06-08 07:30', null);
 INSERT INTO `punchcard` VALUES ('144', '刘能', '2019-06-08 17:30', null);
+INSERT INTO `punchcard` VALUES ('157', '陈知心', '2019-06-01 08:00', '');
+INSERT INTO `punchcard` VALUES ('158', '陈知心', '2019-06-01 08:00', '');
 
 -- ----------------------------
 -- Table structure for repaircrad
@@ -390,18 +393,19 @@ CREATE TABLE `repaircrad` (
   `repairCradDate` varchar(255) COLLATE utf8_unicode_520_ci DEFAULT NULL,
   `repairCradReason` varchar(255) COLLATE utf8_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`Id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of repaircrad
 -- ----------------------------
-INSERT INTO `repaircrad` VALUES ('6', '李四', '2019-06-01 17:30', '忘记打卡');
+INSERT INTO `repaircrad` VALUES ('6', '李四', '2019-06-01 17:30', '着急回家');
 INSERT INTO `repaircrad` VALUES ('13', '刘英', '2019-06-01 08:30', '忘记');
 INSERT INTO `repaircrad` VALUES ('21', '陈知心', '2019-06-02 08:00', '来太早忘记');
 INSERT INTO `repaircrad` VALUES ('52', '翠花', '2019-06-03 17:30', '忘记打卡');
 INSERT INTO `repaircrad` VALUES ('60', '刘能', '2019-06-03 17:30', '忘记打卡');
 INSERT INTO `repaircrad` VALUES ('71', '翠花', '2019-06-04 08:00', '忘记了');
 INSERT INTO `repaircrad` VALUES ('86', '李四', '2019-06-05 17:30', '下班急着回家忘记打卡');
+INSERT INTO `repaircrad` VALUES ('97', '赵构', '2019-06-05 17:00', '');
 
 -- ----------------------------
 -- Table structure for station
@@ -416,7 +420,7 @@ CREATE TABLE `station` (
   `stationCategory` varchar(255) COLLATE utf8_unicode_520_ci DEFAULT NULL,
   `stationDescription` varchar(255) COLLATE utf8_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`stationId`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=505 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=506 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of station
@@ -437,9 +441,9 @@ CREATE TABLE `tlogin` (
   `UserName` varchar(255) COLLATE utf8_unicode_520_ci DEFAULT NULL,
   `PassWord` varchar(255) COLLATE utf8_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`Id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10026 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=10057 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of tlogin
 -- ----------------------------
-INSERT INTO `tlogin` VALUES ('10016', 'Admin', '1');
+INSERT INTO `tlogin` VALUES ('1', 'Admin', '1');
